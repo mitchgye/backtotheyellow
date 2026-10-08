@@ -1,0 +1,8 @@
+{
+  "far": 150,
+  "initial": 100,
+  "medium": 60,
+  "heavy": 30,
+  "critical": 10,
+  "final": 3
+}

@@ -1,0 +1,13 @@
+{
+  "name": "backrooms-memory-system",
+  "version": "1.0.0",
+  "description": "Backrooms event and intrusive memory system API for Roblox Studio integration",
+  "main": "server.js",
+  "scripts": {
+    "start": "node index",
+    "dev": "node --watch index"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

@@ -1,0 +1,72 @@
+[
+  {
+    "id": "doors_hotel",
+    "name": "Forgotten Hotel",
+    "originalExperience": "DOORS-inspired hotel",
+    "placeId": null,
+    "universeId": null,
+    "category": "hotel",
+    "intensity": 80,
+    "deformationProfile": "Long corridors bend into impossible angles; distant lights pulse out of rhythm.",
+    "spawnProbability": 30,
+    "enabled": true,
+    "cooldownSeconds": 90,
+    "notes": "Original placeholder; no game assets."
+  },
+  {
+    "id": "minecraft_room",
+    "name": "The Quiet Blockroom",
+    "originalExperience": "Minecraft-inspired room",
+    "placeId": null,
+    "universeId": null,
+    "category": "environment",
+    "intensity": 55,
+    "deformationProfile": "Square surfaces drift apart as geometric shadows move independently.",
+    "spawnProbability": 20,
+    "enabled": true,
+    "cooldownSeconds": 90,
+    "notes": "Original placeholder; no game assets."
+  },
+  {
+    "id": "combat_arena",
+    "name": "Arena Without Applause",
+    "originalExperience": "Fighting game arena",
+    "placeId": null,
+    "universeId": null,
+    "category": "arena",
+    "intensity": 75,
+    "deformationProfile": "Empty stands repeat into darkness; the floor records impacts that never happened.",
+    "spawnProbability": 18,
+    "enabled": true,
+    "cooldownSeconds": 120,
+    "notes": "Original placeholder."
+  },
+  {
+    "id": "abandoned_lobby",
+    "name": "Lobby After Closing",
+    "originalExperience": "Abandoned Roblox lobby",
+    "placeId": null,
+    "universeId": null,
+    "category": "lobby",
+    "intensity": 65,
+    "deformationProfile": "Welcome signs lose their letters; every exit leads back to the same room.",
+    "spawnProbability": 22,
+    "enabled": true,
+    "cooldownSeconds": 90,
+    "notes": "Original placeholder."
+  },
+  {
+    "id": "unknown_entity",
+    "name": "Uncatalogued Presence",
+    "originalExperience": "Unknown entity",
+    "placeId": null,
+    "universeId": null,
+    "category": "entity",
+    "intensity": 95,
+    "deformationProfile": "A distant silhouette appears only when it is not directly observed.",
+    "spawnProbability": 10,
+    "enabled": true,
+    "cooldownSeconds": 180,
+    "notes": "Original placeholder."
+  }
+]
