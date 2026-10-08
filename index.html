@@ -31,7 +31,8 @@ end</pre></div></section>
 <div id="modalRoot"></div><div id="toast" class="toast hidden" role="status"></div>
 <script>
 'use strict';
-const API_BASE = (window.BACKEND_URL || 'http://localhost:3000').replace(/\/$/, '');
+window.BACKEND_URL = 'https://backtotheyellow.onrender.com';
+const API_BASE = window.BACKEND_URL.replace(/\/$/, '');
 let state = { memories: [], settings: { far: 150, initial: 100, medium: 60, heavy: 30, critical: 10, final: 3 }, logs: [], status: null, lastRequest: null };
 let toastTimer;
 const $ = (id) => document.getElementById(id);
@@ -148,6 +149,9 @@ setStatusUI('offline', 'BACKEND OFFLINE');
 $('uptimeMetric').textContent = '—';
 $('requestsMetric').textContent = '0';
 $('robloxMetric').textContent = 'UNVERIFIED';
+renderMemories();
+renderSettings();
+renderLogs();
 notify('Backend connection failed: ' + error.message, true);
 }
 }

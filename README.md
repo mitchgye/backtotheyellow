@@ -9,10 +9,10 @@ The UI in `index.html` is a static dashboard hosted on GitHub Pages. It is not t
 Configure the backend URL before using it in production:
 
 ```js
-window.BACKEND_URL = 'https://your-backend.example.com';
+window.BACKEND_URL = 'https://backtotheyellow.onrender.com';
 ```
 
-If `window.BACKEND_URL` is not defined, the page falls back to `http://localhost:3000`.
+The dashboard uses this HTTPS backend URL and keeps its interface available if the backend is temporarily unreachable.
 
 ## Backend
 
@@ -23,7 +23,7 @@ npm install
 npm start
 ```
 
-The API listens on `http://localhost:3000` by default.
+The API listens on port `3000` by default.
 
 ### Optional API key for protected writes
 
@@ -76,4 +76,4 @@ API_KEY=change-me
 NODE_ENV=production
 ```
 
-Then expose the app over HTTPS and set `window.BACKEND_URL` to the public domain.
+Then expose the app over HTTPS and set `window.BACKEND_URL` in the dashboard to the public domain.
