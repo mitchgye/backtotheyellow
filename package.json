@@ -4,8 +4,8 @@
   "description": "Backrooms event and intrusive memory system API for Roblox Studio integration",
   "main": "server.js",
   "scripts": {
-    "start": "node index",
-    "dev": "node --watch index"
+    "start": "node server.js",
+    "dev": "node --watch server.js"
   },
   "dependencies": {
     "express": "^4.19.2"

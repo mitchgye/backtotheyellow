@@ -5,6 +5,12 @@ const path = require('path');
 const app = express();
 const PORT = Number(process.env.PORT) || 3000;
 const API_KEY = process.env.API_KEY || '';
+const ALLOWED_ORIGINS = new Set(
+  (process.env.CORS_ORIGINS || 'https://mitchgye.github.io')
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean)
+);
 const STARTED_AT = Date.now();
 const DATA_DIR = path.join(__dirname, 'data');
 const MEMORIES_FILE = path.join(DATA_DIR, 'memories.json');
@@ -284,6 +290,22 @@ function ensureAuthorized(req, res, next) {
 }
 
 app.disable('x-powered-by');
+app.use((req, res, next) => {
+  const origin = req.get('Origin');
+
+  if (origin && ALLOWED_ORIGINS.has(origin)) {
+    res.set('Access-Control-Allow-Origin', origin);
+    res.vary('Origin');
+    res.set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
+    res.set('Access-Control-Allow-Headers', 'Content-Type, X-API-Key');
+  }
+
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(204);
+  }
+
+  return next();
+});
 app.use(express.json({ limit: '64kb' }));
 app.use((req, res, next) => {
   requestCount += 1;
