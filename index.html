@@ -138,7 +138,15 @@ $('headConnection').textContent = 'BACKEND ONLINE';
 $('headDot').style.background = 'var(--green)';
 $('uptimeMetric').textContent = fmtUptime(status.uptimeSeconds ?? status.uptime);
 $('requestsMetric').textContent = status.requestCount ?? status.requests ?? 0;
+try {
+const robloxStatus = await request('/api/roblox/status');
+const robloxConnected = robloxStatus.connected === true;
+$('robloxMetric').textContent = robloxConnected ? 'VERIFIED' : 'UNVERIFIED';
+$('robloxMetric').className = robloxConnected ? 'metric good' : 'metric warning';
+} catch (_error) {
 $('robloxMetric').textContent = 'UNVERIFIED';
+$('robloxMetric').className = 'metric warning';
+}
 $('lastRequest').textContent = 'Last successful request: ' + (state.lastRequest || '—');
 renderMemories();
 renderSettings();
@@ -149,6 +157,7 @@ setStatusUI('offline', 'BACKEND OFFLINE');
 $('uptimeMetric').textContent = '—';
 $('requestsMetric').textContent = '0';
 $('robloxMetric').textContent = 'UNVERIFIED';
+$('robloxMetric').className = 'metric warning';
 renderMemories();
 renderSettings();
 renderLogs();

@@ -47,6 +47,8 @@ X-API-Key: your-secret-key
 - `GET /api/memories/:id` — fetch a specific memory.
 - `GET /api/settings` — get deformation settings.
 - `GET /api/director/next` — select the next memory using weighted probability and cooldowns.
+- `POST /api/roblox/heartbeat` — record a heartbeat from the Roblox server.
+- `GET /api/roblox/status` — report whether a Roblox heartbeat arrived within the last 30 seconds.
 - `POST /api/test-event` — test the event selection system; requires `X-API-Key` if configured.
 - `POST /api/memories` — create a memory; requires `X-API-Key` if configured.
 - `PUT /api/settings` — update all settings; requires `X-API-Key` if configured.
@@ -77,3 +79,7 @@ NODE_ENV=production
 ```
 
 Then expose the app over HTTPS and set `window.BACKEND_URL` in the dashboard to the public domain.
+
+### Roblox server heartbeat
+
+Add `roblox-heartbeat.server.lua` as a **Script** under `ServerScriptService` in Roblox Studio (not as a LocalScript) and enable **Game Settings → Security → Allow HTTP Requests**. The Script sends a JSON heartbeat immediately and every 15 seconds. The dashboard reports Roblox as verified only while a heartbeat is no more than 30 seconds old.

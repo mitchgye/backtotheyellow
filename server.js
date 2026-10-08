@@ -11,6 +11,7 @@ const ALLOWED_ORIGINS = new Set(
     .map((origin) => origin.trim())
     .filter(Boolean)
 );
+const ROBLOX_HEARTBEAT_TIMEOUT_MS = 30 * 1000;
 const STARTED_AT = Date.now();
 const DATA_DIR = path.join(__dirname, 'data');
 const MEMORIES_FILE = path.join(DATA_DIR, 'memories.json');
@@ -103,6 +104,7 @@ let requestCount = 0;
 let lastSuccessfulRequest = null;
 let previousSelectionId = null;
 const cooldowns = new Map();
+let lastRobloxHeartbeatAt = null;
 
 function readJson(filePath, fallback) {
   try {
@@ -340,6 +342,37 @@ app.get('/api/status', (req, res) => {
     enabledMemories: memories.filter((memory) => memory.enabled).length,
     settings,
     logs: events.slice(0, 20)
+  });
+});
+
+app.post('/api/roblox/heartbeat', (req, res) => {
+  if (!req.body || typeof req.body !== 'object' || Array.isArray(req.body)) {
+    return jsonResponse(res, 400, { success: false, error: 'Heartbeat payload must be a JSON object' });
+  }
+
+  lastRobloxHeartbeatAt = Date.now();
+
+  return jsonResponse(res, 200, {
+    success: true,
+    received: true,
+    timestamp: new Date(lastRobloxHeartbeatAt).toISOString()
+  });
+});
+
+app.get('/api/roblox/status', (req, res) => {
+  const ageMs = lastRobloxHeartbeatAt === null
+    ? null
+    : Date.now() - lastRobloxHeartbeatAt;
+  const ageSeconds = ageMs === null ? null : Math.floor(ageMs / 1000);
+  const connected = ageMs !== null && ageMs <= ROBLOX_HEARTBEAT_TIMEOUT_MS;
+
+  return jsonResponse(res, 200, {
+    success: true,
+    connected,
+    lastHeartbeat: lastRobloxHeartbeatAt === null
+      ? null
+      : new Date(lastRobloxHeartbeatAt).toISOString(),
+    ageSeconds
   });
 });
 
